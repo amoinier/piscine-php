@@ -34,8 +34,8 @@ if (file_exists("database") && file_exists("database/bdd.csv") && file_exists("d
 					<?php
 					is_cat($val, 'categorie2', 1);
 					?></select>
-					&nbsp;Qantity: <input type="number" name="qte" value="<?php echo $val['qte'];?>">
-					&nbsp;Prix (euros): <input type="text" name="prix" value="<?php echo $val['prix'];?>">
+					&nbsp;Qantity: <input type="number" name="qte" min="0" value="<?php echo $val['qte'];?>">
+					&nbsp;Price (euros): <input type="number" name="prix" min="0.1" step="0.1" value="<?php echo $val['prix'];?>">
 					<input type="submit" name="submit" value="EDIT">
 					<input type="submit" name="submit" value="DEL"></span><br />
 				</form><br />
@@ -53,8 +53,8 @@ if (file_exists("database") && file_exists("database/bdd.csv") && file_exists("d
 			<?php
 			is_cat($val, 'categorie2', 0);
 			?></select>
-			&nbsp;Qantity: <input type="number" name="qte">
-			&nbsp;Prix (euros): <input type="text" name="prix">
+			&nbsp;Qantity: <input type="number" min="0" name="qte">
+			&nbsp;Price (euros): <input type="number" min="0.1" step="0.1" name="prix">
 			<input type="submit" name="submit" value="ADD"></span><br />
 		</form>
 	</body>

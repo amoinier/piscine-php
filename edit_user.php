@@ -51,9 +51,14 @@ if (file_exists("database") && file_exists("database/bdd.csv") && file_exists("d
 			&nbsp;City: <input type="text" name="city" value="">
 			&nbsp;Admin: <input type="text" name="admin" value="">
 			<input type="submit" name="submit" value="ADD"></span><br />
-		</form><br /><b>
-		<?php echo $_SESSION['error'];
-		$_SESSION['error'] = ""; ?></b>
+		</form><br />
+		<?php if ($_SESSION['error'])
+		{
+			echo "<span class='add'>";
+			echo $_SESSION['error'];
+			echo "</span>";
+			$_SESSION['error'] = "";
+		}?>
 	</body>
 </html>
 <?php }

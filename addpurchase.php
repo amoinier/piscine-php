@@ -1,5 +1,33 @@
 <?php
 header('Location: panier.php');
+function read_basket($basket)
+{
+	$total = 0;
+	$a .= "Your order is being validated !\n\n";
+	foreach ($basket as $key => $val)
+	{
+		$s = 0;
+		foreach ($val as $key => $val2)
+		{
+			if ($val2 == $val['item'])
+				$a .= "Item: ".$val2." ";
+			if ($val2 == $val['qte'])
+			{
+				$s = $val2;
+				$a .= "Qantity: ".$s." ";
+			}
+			if ($val2 == $val['prix'])
+			{
+				$s = $s * $val2;
+				$total = $total + $s;
+				$a .= "Price: ".$s."euro(s)";
+			}
+		}
+		$a .= "\n";
+	}
+	$a .= "\nTotal: ".$total."euro(s)";
+	return ($a);
+}
 session_start();
 if ($_POST['submit'] === 'YES')
 {
@@ -37,6 +65,8 @@ if ($_POST['submit'] === 'YES')
 				}
 			}
 			$data[$ok]['purchase'][$count] = $_SESSION['basket'];
+			$str = read_basket($_SESSION['basket']);
+			mail($data[$_SESSION['nblogin']]['mail'], "Your command - E-CHEAP", $str);
 			unset($_SESSION['basket']);
 			if ($_SESSION['login'])
 			{

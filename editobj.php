@@ -17,7 +17,7 @@ $i = 1;
 		}
 		if ($i == 0 && $_POST['submit'] === 'EDIT')
 		{
-			if ($_POST['item'] && $_POST['categorie1'] && $_POST['categorie2'] && $_POST['qte'] && $_POST['prix'])
+			if ($_POST['item'] && trim($_POST['item']) && $_POST['categorie1'] && $_POST['categorie2'] && is_numeric($_POST['qte']) && is_numeric($_POST['prix']))
 			{
 				$data[$ok]['item'] = $_POST['item'];
 				$data[$ok]['categorie1'] = $_POST['categorie1'];

@@ -6,10 +6,15 @@ if (!file_exists("database") && !file_exists("database/bdd.csv") && !file_exists
 if (file_exists("database") && file_exists("database/bdd.csv") && file_exists("database/account.csv") && file_exists("database/category.csv")) {
 	include ("inc.php");?>
 <HTML>
-	<HEAD><TITLE>Articles de E-CHEAP</TITLE>
+	<HEAD><TITLE>E-CHEAP</TITLE>
 		<LINK REL="stylesheet" href="style.css">
 	</HEAD>
 		<BODY>
+			<?php if ($_SESSION['ok'])
+			{?>
+			<span class="error"><?php echo $_SESSION['ok'];?></span>
+			<?php $_SESSION['ok'] = "";
+		}?>
 			<BR />
 		<CENTER><H1><span class="title">Available Items</span></H1></CENTER>
 		<?php

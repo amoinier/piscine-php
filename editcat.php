@@ -19,7 +19,7 @@ $i = 1;
 		{
 			if ($_POST['catname'])
 			{
-				$data[$ok]['catname'] = $_POST['catname'];
+				$data[$ok]['catname'] = trim($_POST['catname']);
 				file_put_contents("database/category.csv", serialize($data));
 			}
 			else {

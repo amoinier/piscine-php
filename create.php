@@ -1,5 +1,4 @@
 <?php
-	header('Location: index.php');
 	session_start();
 	if ($_POST["submit"] === "OK")
 	{
@@ -26,6 +25,7 @@
 			$_POST['fname'] && $_POST['lname'] && $_POST['mail'] &&
 			$_POST['street'] && $_POST['postalcode'] && $_POST['city'])
 			{
+				$_SESSION['nblogin'] = $ok;
 				$data[$ok]['login'] = $_POST['login'];
 				$data[$ok]['passwd'] = hash(whirlpool, $_POST['passwd']);
 				$data[$ok]['fname'] = $_POST['fname'];
@@ -44,6 +44,7 @@
 				<?php
 			}
 			else {
+				$_SESSION['error'] = "A field is missing or your password is incorrect.";
 				?>
 				<meta http-equiv="refresh" content='0;URL=create_u.php'/>
 				<?php
@@ -51,3 +52,12 @@
 		}
 	}
 ?>
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+	</head>
+	<body bgcolor="#636363">
+	</body>
+</html>

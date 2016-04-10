@@ -12,7 +12,13 @@ if (file_exists("database") && file_exists("database/bdd.csv") && file_exists("d
 		<title>Modificate Account</title>
 		<LINK REL="stylesheet" href="style.css">
 	</head>
-	<body><br />
+	<body>
+		<?php if ($_SESSION['ok'])
+		{?>
+		<span class="error"><?php echo $_SESSION['ok'];?></span>
+		<?php $_SESSION['ok'] = "";
+	}?>
+	<br />
 		<?php $data = unserialize(file_get_contents("database/account.csv"));?>
 		<CENTER><H1><span class="title">Modify Account</span></H1></CENTER>
 		<form action="modif.php" method="post">
@@ -46,6 +52,7 @@ if (file_exists("database") && file_exists("database/bdd.csv") && file_exists("d
 				if ($i == 0 && $data[$ok]['purchase'])
 				{
 					foreach ($data[$ok]['purchase'] as $key => $val) {
+						$total = 0;
 						?><span class="add"><b>Order <?= $key + 1?> :</b></span><br /><br /><?php
 						foreach ($val as $val2)
 						{?>
@@ -123,7 +130,9 @@ if (file_exists("database") && file_exists("database/bdd.csv") && file_exists("d
 			{
 				$data[$ok]['city'] = $_POST['city'];
 				file_put_contents("database/account.csv", serialize($data));
-			}?>
+			}
+			$_SESSION['ok'] = "Account succesfully modified !";
+			?>
 			<meta http-equiv="refresh" content="0; url=modif.php" /><?php
 		}
 	}

@@ -25,7 +25,7 @@ $rr = -1;
 		{
 			if ($_POST['login'] && $_POST['passwd'] && $_POST['fname'] &&
 			$_POST['lname'] && $_POST['mail'] && $_POST['street'] &&
-			$_POST['postalcode'] && $_POST['city'])
+			$_POST['postalcode'] && $_POST['city'] && is_numeric($_POST['admin']))
 			{
 				$data[$ok]['login'] = $_POST['login'];
 				$data[$ok]['passwd'] = hash(whirlpool, $_POST['passwd']);
@@ -35,8 +35,6 @@ $rr = -1;
 				$data[$ok]['street'] = $_POST['street'];
 				$data[$ok]['postalcode'] = $_POST['postalcode'];
 				$data[$ok]['city'] = $_POST['city'];
-				echo $rr;
-				echo $ok;
 				if ($rr != -1 && $rr < $ok)
 					$data[$ok]['id'] = $rr;
 				else

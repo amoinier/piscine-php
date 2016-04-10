@@ -41,7 +41,7 @@ if (file_exists("database") && file_exists("database/bdd.csv") && file_exists("d
 <?php if ($_SESSION['login']) {?>
 <span class="pseudo">Welcome <?php echo $_SESSION['login']?></span>
 <?php } else { ?>
-	<span class="pseudo">Welcome</span>
+	<span class="pseudo">Welcome Visitor</span>
 <?php }?>
 <ul id="menu">
 

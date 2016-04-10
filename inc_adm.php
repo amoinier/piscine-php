@@ -6,6 +6,7 @@ if (!file_exists("database") && !file_exists("database/bdd.csv") && !file_exists
 if (file_exists("database") && file_exists("database/bdd.csv") && file_exists("database/account.csv") && file_exists("database/category.csv") && $_SESSION['admin'] == 1) {?>
 <!DOCTYPE html>
 <html>
+<LINK REL="stylesheet" href="style.css">
 <head>
 <body style="background-color:#636363">
 <style>
@@ -38,6 +39,9 @@ ul#menu li a:hover {
 </style>
 </head>
 <body>
+	<?php if ($_SESSION['login']) {?>
+	<span class="pseudo">Welcome <?php echo $_SESSION['login']?></span>
+	<?php } ?>
 <ul id="menu">
   <li><a href="index.php">Home</a></li>
   <li><a href="panier.php">Basket</a></li>
@@ -45,6 +49,7 @@ ul#menu li a:hover {
   <li><a href="edit_category.php">Manage Categories</a></li>
   <li><a href="edit_obj.php">Manage Inventories</a></li>
   <li><a href="edit_user.php">Manage Users</a></li>
+  <li><a href="adm_order.php">Order's History</a></li>
 
   <li><a href="logout.php">Logout</a></li>
 

@@ -30,6 +30,7 @@
 				}
 			}
 		}
+		$_SESSION['ok'] = "An item of your basket has been updated !";
 	}
 	else if ($_POST['submit'] === DEL)
 	{
@@ -53,5 +54,6 @@
 				}
 			}
 		}
+		$_SESSION['ok'] = "An item of your basket has been removed !";
 	}
 ?>

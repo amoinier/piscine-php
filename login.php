@@ -45,9 +45,15 @@ if (file_exists("database") && file_exists("database/bdd.csv") && file_exists("d
 				else {
 					$_SESSION['basket'] = $data[$_SESSION['nblogin']]['basket'];
 				}?>
-				<meta http-equiv="refresh" content="0; url=index.php" />
+					<meta http-equiv="refresh" content="0; url=index.php" />
 				<?php
 			}
+			else {
+				echo "<br /><br /><span class='add'>Your passsword doesn't match with your login.</span>";
+			}
+		}
+		else if ($_POST) {
+			echo "<br /><br /><span class='add'>Your passsword doesn't match with your login.</span>";
 		}
 		?>
 	</body>

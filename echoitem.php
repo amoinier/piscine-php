@@ -53,5 +53,6 @@ if ($_POST['howmuch'] AND $_POST['item'] AND $_POST['prix'] AND $_POST['categori
 			file_put_contents("database/account.csv", serialize($data));
 		}
 	}
+	$_SESSION['ok'] = "Item added in your basket !";
 }
 ?>

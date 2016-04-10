@@ -11,6 +11,12 @@ if (file_exists("database") && file_exists("database/bdd.csv") && file_exists("d
 		<LINK REL="stylesheet" href="style.css">
 	</HEAD>
 		<BODY>
+			<?php if ($_SESSION['ok'])
+			{?>
+			<span class="error"><?php echo $_SESSION['ok'];?></span>
+			<?php $_SESSION['ok'] = "";
+		}?>
+			<br />
 		<CENTER><H1><span class="title">Basket</span></H1></CENTER>
 		<?php
 		if ($_SESSION['basket'])
