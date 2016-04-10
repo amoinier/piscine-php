@@ -14,7 +14,7 @@
 	</body>
 </html>
 <?php
-if ($_POST['submit'] === istall)
+if ($_POST['submit'] === install)
 {
 	if (!file_exists("database") && !file_exists("database/bdd.csv") && !file_exists("database/account.csv") && !file_exists("database/category.csv"))
 	{
@@ -38,6 +38,9 @@ if ($_POST['submit'] === istall)
 			$data[0]['id'] = 0 + 1;
 			file_put_contents("database/account.csv", serialize($data));
 			$_SESSION['login'] = $_POST['login'];
+			?>
+			<meta http-equiv="refresh" content='0;URL=articles.php'/>
+			<?php
 		}
 		else
 		{
@@ -50,6 +53,6 @@ if ($_POST['submit'] === istall)
 		<?php
 	}
 	else
-		echo "The databse is already create.";
+		echo "The database is already create.";
 }
 ?>
