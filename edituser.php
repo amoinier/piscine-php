@@ -1,8 +1,7 @@
 <?php
 header('Location: edit_user.php');
 session_start();
-if (!file_exists("database/account.csv"))
-	file_put_contents("database/account.csv", "");
+if ($_SESSION['admin']) {
 $data = unserialize(file_get_contents("database/account.csv"));
 $i = 1;
 		if ($data)
@@ -18,19 +17,48 @@ $i = 1;
 		}
 		if ($i == 0 && $_POST['submit'] === 'EDIT')
 		{
-			if ($_POST['login'] && $_POST['fname'] && $_POST['lname'] &&
-			$_POST['mail'] && $_POST['street'] && $_POST['postalcode'] &&
-			$_POST['city'] && $_POST['admin'])
+			if ($i == 0 && $_POST['mail'])
 			{
-				$data[$ok]['login'] = $_POST['login'];
-				$data[$ok]['fname'] = $_POST['fname'];
-				$data[$ok]['lname'] = $_POST['lname'];
 				$data[$ok]['mail'] = $_POST['mail'];
-				$data[$ok]['street'] = $_POST['street'];
-				$data[$ok]['postalcode'] = $_POST['postalcode'];
-				$data[$ok]['city'] = $_POST['city'];
-				$data[$ok]['admin'] = $_POST['admin'];
 				file_put_contents("database/account.csv", serialize($data));
+				echo "OK\n";
+			}
+			if ($i == 0 && $_POST['fname'])
+			{
+				$data[$ok]['fname'] = $_POST['fname'];
+				file_put_contents("database/account.csv", serialize($data));
+				echo "OK\n";
+			}
+			if ($i == 0 && $_POST['lname'])
+			{
+				$data[$ok]['lname'] = $_POST['lname'];
+				file_put_contents("database/account.csv", serialize($data));
+				echo "OK\n";
+			}
+			if ($i == 0 && $_POST['street'])
+			{
+				$data[$ok]['street'] = $_POST['street'];
+				file_put_contents("database/account.csv", serialize($data));
+				echo "OK\n";
+			}
+			if ($i == 0 && $_POST['postalcode'])
+			{
+				$data[$ok]['postalcode'] = $_POST['postalcode'];
+				file_put_contents("database/account.csv", serialize($data));
+				echo "OK\n";
+			}
+			if ($i == 0 && $_POST['city'])
+			{
+				$data[$ok]['city'] = $_POST['city'];
+				file_put_contents("database/account.csv", serialize($data));
+				echo "OK\n";
+			}
+			if ($i == 0 && is_numeric($_POST['admin']))
+			{
+				$data[$ok]['admin'] = $_POST['admin'];
+				$_SESSION['admin'] = $_POST['admin'];
+				file_put_contents("database/account.csv", serialize($data));
+				echo "OK\n";
 			}
 			else {
 				?>
@@ -40,11 +68,26 @@ $i = 1;
 		}
 		else if ($i == 0 && $_POST['submit'] === 'DEL')
 		{
-			unset($data[$ok]);
-			$data = array_values(array_filter($data));
-			file_put_contents("database/account.csv", serialize($data));
-			echo "OK\n";
+			$data = unserialize(file_get_contents("database/account.csv"));
+			$k = 0;
+			foreach ($data as $key => $val)
+			{
+				if ($_SESSION['login'] === $_POST['login'])
+				{
+					$k = 1;
+				}
+			}
+			if ($k == 0)
+			{
+				unset($data[$ok]);
+				$data = array_values(array_filter($data));
+				file_put_contents("database/account.csv", serialize($data));
+				echo "OK\n";
+			}
+			else {
+				$_SESSION['error'] = "Log out before deleting yourself.\n";
+			}
 		}
 		else
 			echo "ERROR\n";
-?>
+}?>

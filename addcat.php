@@ -1,8 +1,8 @@
 <?php
 header('Location: edit_category.php');
 session_start();
-if (!file_exists("database/category.csv"))
-	file_put_contents("database/category.csv", "");
+if ($_SESSION['admin'] == 1)
+{
 $data = unserialize(file_get_contents("database/category.csv"));
 $i = 1;
 $ok = 0;
@@ -26,10 +26,11 @@ $ok = 0;
 			}
 			else {
 				?>
-				<meta http-equiv="refresh" content='0;URL=edit_category.html'/>
+				<meta http-equiv="refresh" content='0;URL=edit_category.php'/>
 				<?php
 			}
 		}
 		else
 			echo "ERROR\n";
+}
 ?>

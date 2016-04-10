@@ -1,7 +1,6 @@
 <?php
 	header('Location: panier.php');
 	session_start();
-	include('actubasket.php');
 	if ($_POST['submit'] === EDIT)
 	{
 		foreach ($_SESSION['basket'] as $key => $val)

@@ -1,11 +1,8 @@
 <?php
+	header('Location: index.php');
 	session_start();
 	if ($_POST["submit"] === "OK")
 	{
-		if (!file_exists("database"))
-			mkdir("database");
-		if (!file_exists("database/account.csv"))
-			file_put_contents("database/account.csv", "");
 		$data = unserialize(file_get_contents("database/account.csv"));
 		$i = 1;
 		$ok = 0;
@@ -16,7 +13,7 @@
 				if ($val['login'] === $_POST["login"])
 				{
 					?>
-					<meta http-equiv="refresh" content='0;URL=create.html'/>
+					<meta http-equiv="refresh" content='0;URL=create_u.php'/>
 					<?php
 					$i = 0;
 				}
@@ -43,16 +40,14 @@
 				file_put_contents("database/account.csv", serialize($data));
 				$_SESSION['login'] = $_POST['login'];
 				?>
-				<meta http-equiv="refresh" content='0;URL=index.html'/>
+				<meta http-equiv="refresh" content='0;URL=index.php'/>
 				<?php
 			}
 			else {
 				?>
-				<meta http-equiv="refresh" content='0;URL=create.html'/>
+				<meta http-equiv="refresh" content='0;URL=create_u.php'/>
 				<?php
 			}
 		}
 	}
-	else
-		echo "ERROR\n";
 ?>

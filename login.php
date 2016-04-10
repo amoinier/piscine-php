@@ -1,13 +1,23 @@
 <?php
-header('Location: index.html');
-session_start();?>
-<!DOCTYPE html>
+session_start();
+if (!file_exists("database") && !file_exists("database/bdd.csv") && !file_exists("database/account.csv") && !file_exists("database/category.csv")) {?>
+	<meta http-equiv="refresh" content="0; url=install.php" />
+<?php }
+if (file_exists("database") && file_exists("database/bdd.csv") && file_exists("database/account.csv") && file_exists("database/category.csv") && !$_SESSION['login']) {
+	 include ("inc.php"); ?>
 <html>
 	<head>
 		<meta charset="utf-8">
-		<title>login</title>
+		<title>Login</title>
+		<LINK REL="stylesheet" href="style.css">
 	</head>
 	<body>
+		<br />
+		<form action="login.php" method="post">
+			<span class="out">Pseudo: <input type="text" name="login">
+			Password: <input type="password" name="passwd">
+			<input type="submit" name="submit" value="OK"></span>
+		</form>
 		<?php
 		include("auth.php");
 		if ($_POST["login"] && $_POST["passwd"])
@@ -23,6 +33,7 @@ session_start();?>
 						if ($val['login'] === $_SESSION['login'])
 						{
 							$_SESSION['nblogin'] = $key;
+							$_SESSION['admin'] = $val['admin'];
 						}
 					}
 				}
@@ -31,8 +42,14 @@ session_start();?>
 					$data[$_SESSION['nblogin']]['basket'] = $_SESSION['basket'];
 					file_put_contents("database/account.csv", serialize($data));
 				}
+				else {
+					$_SESSION['basket'] = $data[$_SESSION['nblogin']]['basket'];
+				}?>
+				<meta http-equiv="refresh" content="0; url=index.php" />
+				<?php
 			}
 		}
 		?>
 	</body>
 </html>
+<?php }?>

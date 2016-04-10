@@ -1,30 +1,33 @@
 <?php
 session_start();
-include ('inc.php');
-?>
+if (!file_exists("database") && !file_exists("database/bdd.csv") && !file_exists("database/account.csv") && !file_exists("database/category.csv")) {?>
+	<meta http-equiv="refresh" content="0; url=install.php" />
+<?php }
+if (file_exists("database") && file_exists("database/bdd.csv") && file_exists("database/account.csv") && file_exists("database/category.csv")) {
+	 include ("inc.php"); ?>
+<!DOCTYPE html>
 <HTML>
-	<HEAD><TITLE>Panier</TITLE>
+	<HEAD><TITLE>Basket</TITLE>
+		<LINK REL="stylesheet" href="style.css">
 	</HEAD>
 		<BODY>
-		<CENTER><H1>Contenu de votre panier</H1></CENTER>
+		<CENTER><H1><span class="title">Basket</span></H1></CENTER>
 		<?php
 		if ($_SESSION['basket'])
 		{
 			foreach ($_SESSION['basket'] as $val)
 			{?>
 				<form action="editpanier.php" method="post">
-					<b>Produit: </b><?php echo $val['item'];?><input type="hidden" name="item" value=<?php echo $val['item'];?>>&nbsp;&nbsp;
-					<b>Categorie1: </b><?php echo $val['categorie1'];?>&nbsp;&nbsp;
-					<b>Categorie2: </b><?php echo $val['categorie2'];?>&nbsp;&nbsp;
-					<b>Qte: </b><input type="number" name="qte" min="0" value="<?php echo $val['qte'];?>">
-					<b>Prix: </b><?php echo $val['prix'] * $val['qte'];?>&nbsp;&nbsp;
+					<span class="out"><b>Item: </b><?php echo $val['item'];?><input type="hidden" name="item" value=<?php echo $val['item'];?>>&nbsp;&nbsp;
+					<b>Qantity: </b><input type="number" name="qte" min="0" max="<?php echo $val['stock'];?>" value="<?php echo $val['qte'];?>">
+					<b>Price: </b><?php echo $val['prix'] * $val['qte'];?>&nbsp;euro(s)&nbsp;
 					<input type="submit" name="submit" value="EDIT">
-					<input type="submit" name="submit" value="DEL"><br />
+					<input type="submit" name="submit" value="DEL"></span><br /><br />
 				</form>
 				<?php
 				$total = $total + ($val['prix'] * $val['qte']);
 			}?>
-			<b>Total: </b><?php echo $total;?>&nbsp;<BR />
+			<BR /><span class='add'><b>Total: </b><?php echo $total;?>&nbsp;euro(s)</span><BR /><BR />
 			<?php
 			if ($_SESSION['login'])
 			{?>
@@ -35,7 +38,8 @@ include ('inc.php');
 			}
 		}
 		else
-			echo "Votre panier est vide\n";
+			echo "<span class='add'>Your basket is empty.</span>";
 		?>
 		</BODY>
 </HTML>
+<?php }?>

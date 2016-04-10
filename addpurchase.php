@@ -3,8 +3,6 @@ header('Location: panier.php');
 session_start();
 if ($_POST['submit'] === 'YES')
 {
-	if (!file_exists("database/bdd.csv"))
-		file_put_contents("database/bdd.csv", "");
 	$data = unserialize(file_get_contents("database/bdd.csv"));
 	foreach ($_SESSION['basket'] as $key1 => $val1)
 	{
@@ -17,36 +15,33 @@ if ($_POST['submit'] === 'YES')
 		}
 		file_put_contents("database/bdd.csv", serialize($data));
 	}
-	if (file_exists("database") && file_exists("database/account.csv"))
+	$data = unserialize(file_get_contents("database/account.csv"));
+	$i = 1;
+	if ($data)
 	{
-		$data = unserialize(file_get_contents("database/account.csv"));
-		$i = 1;
-		if ($data)
+		foreach ($data as $key => $val)
 		{
-			foreach ($data as $key => $val)
+			if ($val['login'] === $_SESSION['login'])
 			{
-				if ($val['login'] === $_SESSION['login'])
-				{
-					$i = 0;
-					$ok = $key;
+				$i = 0;
+				$ok = $key;
+			}
+		}
+		if ($i == 0)
+		{
+			$count = 0;
+			if ($data[$ok]['purchase'])
+			{
+				foreach ($data[$ok]['purchase'] as $key => $val) {
+					$count = $key + 1;
 				}
 			}
-			if ($i == 0)
+			$data[$ok]['purchase'][$count] = $_SESSION['basket'];
+			unset($_SESSION['basket']);
+			if ($_SESSION['login'])
 			{
-				$count = 0;
-				if ($data[$ok]['purchase'])
-				{
-					foreach ($data[$ok]['purchase'] as $key => $val) {
-						$count = $key + 1;
-					}
-				}
-				$data[$ok]['purchase'][$count] = $_SESSION['basket'];
-				unset($_SESSION['basket']);
-				if ($_SESSION['login'])
-				{
-					unset($data[$ok]['basket']);
-					file_put_contents("database/account.csv", serialize($data));
-				}
+				unset($data[$ok]['basket']);
+				file_put_contents("database/account.csv", serialize($data));
 			}
 		}
 	}

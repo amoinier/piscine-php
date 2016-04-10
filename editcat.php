@@ -1,8 +1,7 @@
 <?php
 header('Location: edit_category.php');
 session_start();
-if (!file_exists("database/category.csv"))
-	file_put_contents("database/category.csv", "");
+if ($_SESSION['admin']) {
 $data = unserialize(file_get_contents("database/category.csv"));
 $i = 1;
 		if ($data)
@@ -38,4 +37,5 @@ $i = 1;
 		}
 		else
 			echo "ERROR\n";
+}
 ?>

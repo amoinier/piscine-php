@@ -1,8 +1,8 @@
 <?php
-//header('Location: edit_user.php');
+header('Location: edit_user.php');
 session_start();
-if (!file_exists("database/account.csv"))
-	file_put_contents("database/account.csv", "");
+if ($_SESSION['admin'] == 1)
+{
 $data = unserialize(file_get_contents("database/account.csv"));
 $i = 1;
 $ok = 1;
@@ -52,4 +52,5 @@ $rr = -1;
 		}
 		else
 			echo "ERROR\n";
+}
 ?>

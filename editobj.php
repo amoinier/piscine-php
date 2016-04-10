@@ -1,8 +1,7 @@
 <?php
 header('Location: edit_obj.php');
 session_start();
-if (!file_exists("database/bdd.csv"))
-	file_put_contents("database/bdd.csv", "");
+if ($_SESSION['admin']) {
 $data = unserialize(file_get_contents("database/bdd.csv"));
 $i = 1;
 		if ($data)
@@ -42,4 +41,5 @@ $i = 1;
 		}
 		else
 			echo "ERROR\n";
+		}
 ?>

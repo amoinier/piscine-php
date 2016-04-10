@@ -1,12 +1,17 @@
 <?php
 session_start();
+if (!file_exists("database") && !file_exists("database/bdd.csv") && !file_exists("database/account.csv") && !file_exists("database/category.csv")) {?>
+	<meta http-equiv="refresh" content="0; url=install.php" />
+<?php }
+if (file_exists("database") && file_exists("database/bdd.csv") && file_exists("database/account.csv") && file_exists("database/category.csv")) {
 include ('inc.php');
 ?>
 <HTML>
-	<HEAD><TITLE>Panier</TITLE>
+	<HEAD><TITLE>Order History</TITLE>
+		<LINK REL="stylesheet" href="style.css">
 	</HEAD>
 		<BODY>
-		<CENTER><H1>Ancienne Commandes</H1></CENTER>
+		<CENTER><H1><span class="title">Order History</span></H1></CENTER>
 		<?php
 		if ($_SESSION['login'])
 		{
@@ -22,28 +27,31 @@ include ('inc.php');
 						$ok = $key;
 					}
 				}
-			}
-			if ($i == 0)
-			{
-				foreach ($data[$ok]['purchase'] as $key => $val) {
-					?><b>Commande <?= $key + 1?> :</b><br /><?php
-					foreach ($val as $val2)
-					{?>
-						<b>Produit: </b><?php echo $val2['item'];?>&nbsp;&nbsp;
-						<b>Categorie1: </b><?php echo $val2['categorie1'];?>&nbsp;&nbsp;
-						<b>Categorie2: </b><?php echo $val2['categorie2'];?>&nbsp;&nbsp;
-						<b>Qte: </b><?php echo $val2['qte'];?>
-						<b>Prix: </b><?php echo $val2['prix'] * $val2['qte'];?> euro(s)&nbsp;&nbsp;<br />
+				if ($i == 0)
+				{
+					foreach ($data[$ok]['purchase'] as $key => $val) {
+						?><span class="add"><b>Order <?= $key + 1?> :</b></span><br /><br /><?php
+						foreach ($val as $val2)
+						{?>
+							<span class="out"><b>Item: </b><?php echo $val2['item'];?>&nbsp;&nbsp;
+							<b>Category 1: </b><?php echo $val2['categorie1'];?>&nbsp;&nbsp;
+							<b>Category 2: </b><?php echo $val2['categorie2'];?>&nbsp;&nbsp;
+							<b>Qantity: </b><?php echo $val2['qte'];?>
+							<b>Price: </b><?php echo $val2['prix'] * $val2['qte'];?> euro(s)&nbsp;&nbsp;</span><br /><br />
+							<?php
+							$total = $total + ($val2['prix'] * $val2['qte']);
+						}?>
+						<span class="add"><b>Total: </b><?php echo $total;?> euro(s)</span>&nbsp;<BR /><br /><br />
 						<?php
-						$total = $total + ($val2['prix'] * $val2['qte']);
-					}?>
-					<b>Total: </b><?php echo $total;?> euro(s)&nbsp;<BR /><br />
-					<?php
+					}
 				}
 			}
+			else
+				echo "Vous n'avez jamais commandé.\n";
 		}
-		else
-			echo "Vous n'avez jamais commandé.\n";
-		?>
+		else {?>
+		<meta http-equiv="refresh" content='0;URL=index.php'/>
+		<?php }
+	}?>
 		</BODY>
 </HTML>
