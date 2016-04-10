@@ -1,5 +1,6 @@
 <?php
 session_start();
+include ('inc.php');
 ?>
 <HTML>
 	<HEAD><TITLE>Panier</TITLE>
@@ -15,7 +16,7 @@ session_start();
 					<b>Produit: </b><?php echo $val['item'];?><input type="hidden" name="item" value=<?php echo $val['item'];?>>&nbsp;&nbsp;
 					<b>Categorie1: </b><?php echo $val['categorie1'];?>&nbsp;&nbsp;
 					<b>Categorie2: </b><?php echo $val['categorie2'];?>&nbsp;&nbsp;
-					<b>Qte: </b><input type="number" name="qte" value="<?php echo $val['qte'];?>">
+					<b>Qte: </b><input type="number" name="qte" min="0" value="<?php echo $val['qte'];?>">
 					<b>Prix: </b><?php echo $val['prix'] * $val['qte'];?>&nbsp;&nbsp;
 					<input type="submit" name="submit" value="EDIT">
 					<input type="submit" name="submit" value="DEL"><br />
@@ -25,6 +26,13 @@ session_start();
 			}?>
 			<b>Total: </b><?php echo $total;?>&nbsp;<BR />
 			<?php
+			if ($_SESSION['login'])
+			{?>
+				<form action="buy.php" method="post">
+					<input type="submit" name="submit" value="BUY">
+				</form>
+				<?php
+			}
 		}
 		else
 			echo "Votre panier est vide\n";

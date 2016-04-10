@@ -1,6 +1,7 @@
 <?php
 header('Location: articles.php');
 session_start();
+include('actubasket.php');
 if ($_POST['howmuch'] AND $_POST['item'] AND $_POST['prix'] AND $_POST['categorie1'] AND $_POST['categorie2'])
 {
 	$tab = array('item' => $_POST['item'], 'qte' => $_POST['howmuch'], 'prix' => $_POST['prix'], 'categorie1' => $_POST['categorie1'], 'categorie2' => $_POST['categorie2']);
@@ -39,7 +40,6 @@ if ($_POST['howmuch'] AND $_POST['item'] AND $_POST['prix'] AND $_POST['categori
 	if ($_SESSION['login'])
 	{
 		$data = unserialize(file_get_contents("database/account.csv"));
-		$i = 1;
 		foreach ($data as $key => $val)
 		{
 			if ($val['login'] === $_SESSION['login'])

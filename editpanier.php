@@ -1,6 +1,7 @@
 <?php
 	header('Location: panier.php');
 	session_start();
+	include('actubasket.php');
 	if ($_POST['submit'] === EDIT)
 	{
 		foreach ($_SESSION['basket'] as $key => $val)
@@ -16,6 +17,18 @@
 				{
 					$_SESSION['basket'][$key]['qte'] = $_POST['qte'];
 				}
+				if ($_SESSION['login'])
+				{
+					$data = unserialize(file_get_contents("database/account.csv"));
+					foreach ($data as $key => $val)
+					{
+						if ($val['login'] === $_SESSION['login'])
+						{
+							$data[$key]['basket'] = $_SESSION['basket'];
+						}
+					}
+					file_put_contents("database/account.csv", serialize($data));
+				}
 			}
 		}
 	}
@@ -27,6 +40,18 @@
 			{
 				unset($_SESSION['basket'][$key]);
 				$_SESSION['basket'] = array_values(array_filter($_SESSION['basket']));
+				if ($_SESSION['login'])
+				{
+					$data = unserialize(file_get_contents("database/account.csv"));
+					foreach ($data as $key => $val)
+					{
+						if ($val['login'] === $_SESSION['login'])
+						{
+							$data[$key]['basket'] = $_SESSION['basket'];
+						}
+					}
+					file_put_contents("database/account.csv", serialize($data));
+				}
 			}
 		}
 	}
