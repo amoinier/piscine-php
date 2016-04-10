@@ -41,6 +41,7 @@ if ($_POST['submit'] === install)
 		$data[0]['id'] = 0 + 1;
 		file_put_contents("database/account.csv", serialize($data));
 		$_SESSION['login'] = $_POST['login'];
+		$_SESSION['nblogin'] = 0;
 		$_SESSION['admin'] = 1;
 		?>
 		<meta http-equiv="refresh" content='0;URL=index.php'/>

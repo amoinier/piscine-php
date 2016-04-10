@@ -25,7 +25,6 @@
 			$_POST['fname'] && $_POST['lname'] && $_POST['mail'] &&
 			$_POST['street'] && $_POST['postalcode'] && $_POST['city'])
 			{
-				$_SESSION['nblogin'] = $ok;
 				$data[$ok]['login'] = $_POST['login'];
 				$data[$ok]['passwd'] = hash(whirlpool, $_POST['passwd']);
 				$data[$ok]['fname'] = $_POST['fname'];
@@ -37,8 +36,10 @@
 				$data[$ok]['admin'] = 0;
 				$data[$ok]['id'] = $ok + 1;
 				$data[$ok]['basket'] = $_SESSION['basket'];
+				$_SESSION['admin'] = $data[$ok]['admin'];
 				file_put_contents("database/account.csv", serialize($data));
 				$_SESSION['login'] = $_POST['login'];
+				$_SESSION['nblogin'] = $ok;
 				?>
 				<meta http-equiv="refresh" content='0;URL=index.php'/>
 				<?php
