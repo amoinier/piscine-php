@@ -56,9 +56,12 @@ $i = 1;
 			if ($i == 0 && is_numeric($_POST['admin']))
 			{
 				$data[$ok]['admin'] = $_POST['admin'];
-				$_SESSION['admin'] = $_POST['admin'];
 				file_put_contents("database/account.csv", serialize($data));
 				echo "OK\n";
+			}
+			if ($_SESSION['login'] == $data[$ok]['login'])
+			{
+				$_SESSION['admin'] = $_POST['admin'];
 			}
 			else {
 				?>

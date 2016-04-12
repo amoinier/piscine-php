@@ -3,7 +3,7 @@ header('Location: panier.php');
 function read_basket($basket)
 {
 	$total = 0;
-	$a .= "Your order is being validated !\n\n";
+	$a = "Your order is being validated !\n\n";
 	foreach ($basket as $key => $val)
 	{
 		$s = 0;
