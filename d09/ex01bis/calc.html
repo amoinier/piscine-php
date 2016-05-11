@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Calc</title>
+	</head>
+	<body>
+		<input type="text" id="left">
+		<select id="select">
+			<option value="+" selected>+</option>
+			<option value="-">-</option>
+			<option value="*">*</option>
+			<option value="/">/</option>
+			<option value="%">%</option>
+		</select>
+		<input type="text" id="right">
+		<input type="button" id="submit" value="Try me!">
+		<script src="//code.jquery.com/jquery-2.2.3.min.js"></script>
+		<script>
+		var result;
+		setInterval(function() {
+			alert("Please, use me...");}, 30000);
+		$('#submit').click(function() {
+			if ($('#left').val() && $('#right').val() && !isNaN($('#left').val()) && !isNaN($('#right').val()) && $('#left').val() >= 0 && $('#right').val() >= 0 &&
+			parseInt($('#left').val()) == $('#left').val() && parseInt($('#right').val()) == $('#right').val()) {
+				switch ($('#select').val()) {
+					case '+':
+						result = parseInt($('#left').val()) + parseInt($('#right').val());
+						break;
+					case '-':
+						result = parseInt($('#left').val()) - parseInt($('#right').val());
+						break;
+					case '*':
+						result = parseInt($('#left').val()) * parseInt($('#right').val());
+						break;
+					case '/':
+						if ($('#right').val() == 0) {
+							console.log("It's over 9000!");
+							alert("It's over 9000!");
+							return ;
+						}
+						else
+							result = parseInt($('#left').val()) / parseInt($('#right').val());
+						break;
+					case '%':
+						if ($('#right').val() == 0) {
+							console.log("It's over 9000!");
+							alert("It's over 9000!");
+							return ;
+						}
+						else
+							result = parseInt($('#left').val()) % parseInt($('#right').val());
+					break;
+					default:
+					alert('Error :(');
+
+				}
+				console.log(result);
+				alert(result);
+			}
+			else {
+				alert('Error :(');
+			}
+		});
+		</script>
+	</body>
+</html>

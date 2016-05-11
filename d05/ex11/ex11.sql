@@ -1,0 +1,1 @@
+SELECT upper(`nom`) AS 'NOM', `prenom`, `prix` FROM (`fiche_personne` fp INNER JOIN (SELECT `prix`, `id_fiche_perso` FROM `abonnement` NATURAL JOIN `membre` WHERE `prix` > 42) b ON fp.id_perso = b.id_fiche_perso) ORDER BY fp.nom ASC, fp.prenom ASC;

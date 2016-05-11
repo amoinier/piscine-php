@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Balloon</title>
+		<style media="screen">
+		#balloon{
+			background: red;
+			border-radius: 100%;
+			width: 200px;
+			height: 200px;
+		}
+		</style>
+	</head>
+	<body>
+		<div id="balloon" onClick = "ball();" onmouseout="out();"></div>
+		<script>
+		document.getElementById('balloon').style.background = 'red';
+			function ball() {
+				if (document.getElementById('balloon').offsetHeight < 415 && document.getElementById('balloon').offsetWidth < 415)
+				{
+					document.getElementById('balloon').style.height = document.getElementById('balloon').offsetHeight + 10 + 'px';
+					document.getElementById('balloon').style.width = document.getElementById('balloon').offsetWidth + 10 + 'px';
+				}
+				else {
+					document.getElementById('balloon').style.height = 200 + 'px';
+					document.getElementById('balloon').style.width = 200 + 'px';
+				}
+				if (document.getElementById('balloon').style.background == 'red') {
+					document.getElementById('balloon').style.background = 'green';
+				}
+				else if (document.getElementById('balloon').style.background == 'green') {
+					document.getElementById('balloon').style.background = 'blue';
+				}
+				else if (document.getElementById('balloon').style.background == 'blue') {
+					document.getElementById('balloon').style.background = 'red';
+				}
+			}
+			function out() {
+				if (document.getElementById('balloon').offsetHeight > 200 && document.getElementById('balloon').offsetWidth > 200) {
+					document.getElementById('balloon').style.height = document.getElementById('balloon').offsetHeight - 5 + 'px';
+					document.getElementById('balloon').style.width = document.getElementById('balloon').offsetWidth - 5 + 'px';
+				}
+				if (document.getElementById('balloon').style.background == 'red') {
+					document.getElementById('balloon').style.background = 'blue';
+				}
+				else if (document.getElementById('balloon').style.background == 'blue') {
+					document.getElementById('balloon').style.background = 'green';
+				}
+				else if (document.getElementById('balloon').style.background == 'green') {
+					document.getElementById('balloon').style.background = 'red';
+				}
+			}
+		</script>
+	</body>
+</html>

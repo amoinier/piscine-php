@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Calc</title>
+	</head>
+	<body>
+		<input type="text" id="left">
+		<select id="select">
+			<option value="+" selected>+</option>
+			<option value="-">-</option>
+			<option value="*">*</option>
+			<option value="/">/</option>
+			<option value="%">%</option>
+		</select>
+		<input type="text" id="right">
+		<input type="button" id="submit" value="Try me !" onclick="calcul();">
+		<script>
+		var result;
+		setInterval(function() {
+			alert("Please, use me...");}, 30000);
+		function calcul() {
+			if (document.getElementById('left').value && document.getElementById('right').value &&!isNaN(document.getElementById('left').value) && !isNaN(document.getElementById('right').value) &&
+			document.getElementById('left').value >= 0 && document.getElementById('right').value >= 0 && document.getElementById('right').value == parseInt(document.getElementById('right').value) &&
+			document.getElementById('left').value == parseInt(document.getElementById('left').value)) {
+				switch (document.getElementById('select').value) {
+					case '+':
+						result = parseInt(document.getElementById('left').value) + parseInt(document.getElementById('right').value);
+						break;
+					case '-':
+						result = parseInt(document.getElementById('left').value) - parseInt(document.getElementById('right').value);
+						break;
+					case '*':
+						result = parseInt(document.getElementById('left').value) * parseInt(document.getElementById('right').value);
+						break;
+					case '/':
+						if (document.getElementById('right').value == 0) {
+							console.log("It's over 9000!");
+							alert("It's over 9000!");
+							return ;
+						}
+						else
+							result = parseInt(document.getElementById('left').value) / parseInt(document.getElementById('right').value);
+						break;
+					case '%':
+						if (document.getElementById('right').value == 0) {
+							console.log("It's over 9000!");
+							alert("It's over 9000!");
+							return ;
+						}
+						else
+							result = parseInt(document.getElementById('left').value) % parseInt(document.getElementById('right').value);
+					break;
+					default:
+					alert('Error :(');
+
+				}
+				console.log(result);
+				alert(result);
+			}
+			else {
+				alert('Error :(');
+			}
+		}
+		</script>
+	</body>
+</html>

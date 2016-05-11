@@ -1,0 +1,51 @@
+body {
+	background-color: rgb(87, 87, 87);
+	text-align: center;
+}
+
+.sncf {
+    line-height: 1;
+}
+
+a {
+	width: 140px;
+    display: block;
+    padding: 30px 20px;
+    background: white;
+    text-decoration: none;
+	background: rgb(173, 3, 3);
+	color: white;
+	font-family: helvetica;
+	font-size: 30px;
+	border-radius: 10px;
+}
+a:focus, a:hover {
+    color: black;
+    background: rgb(215, 1, 1);
+}
+
+.menu {
+    float: left;
+	list-style-type: none;
+	margin-right: 15px;
+}
+
+.choix {
+    display: none;
+}
+
+.sm {
+	list-style-type: none;
+}
+
+.obj {
+	font-size: 17px;
+	border-radius: 5px;
+	border-radius: 10px;
+}
+
+.menu:hover ul {
+	display: block;
+	position: absolute;
+	margin-left: -40px;
+}
